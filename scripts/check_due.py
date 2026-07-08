@@ -6,7 +6,7 @@ fire_and_advance.py, once, only on the run that actually fires.
 """
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from zoneinfo import ZoneInfo
 
 STATE_FILE = "state.json"
@@ -24,13 +24,14 @@ def get_next_trigger_utc():
             state = json.load(f)
         return datetime.fromisoformat(state["next_trigger_utc"])
 
-    # No state file yet -> seed to the next occurrence of 1:32 AM local time
+    # No state file yet -> seed to the next 1:32 AM local time. If that
+    # first target already passed, fire now so state.json can be created.
     now_local = datetime.now(LOCAL_TZ)
     candidate = now_local.replace(
         hour=SEED_HOUR, minute=SEED_MINUTE, second=0, microsecond=0
     )
     if candidate <= now_local:
-        candidate += timedelta(days=1)
+        return datetime.now(ZoneInfo("UTC"))
     return candidate.astimezone(ZoneInfo("UTC"))
 
 
