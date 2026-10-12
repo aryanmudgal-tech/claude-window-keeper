@@ -1,5 +1,5 @@
 {
-  "next_trigger_utc": "2026-10-12T14:10:13.494443+00:00",
-  "last_fired_utc": "2026-10-12T09:07:36.168402+00:00",
-  "last_buffer_minutes": 2.62
+  "next_trigger_utc": "2026-10-12T23:59:00.361119+00:00",
+  "last_fired_utc": "2026-10-12T18:56:26.158012+00:00",
+  "last_buffer_minutes": 2.57
 }
